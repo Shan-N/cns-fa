@@ -1,0 +1,6 @@
+__pycache__
+.venv
+gitignore
+dos2.py
+*.pkl
+*.ipynb
