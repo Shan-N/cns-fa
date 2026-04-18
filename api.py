@@ -20,6 +20,8 @@ import pandas as pd
 import joblib
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI(title="AI IPS - Real-Time Dashboard")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
@@ -444,3 +446,149 @@ async def latency_stream(ws: WebSocket):
 @app.get("/health")
 def health():
     return {"status": "ok", "model_loaded": _agent is not None}
+
+
+# ── Manual Predict ─────────────────────────────────────────────────
+class PredictRequest(BaseModel):
+    # Identity
+    src_ip: Optional[str] = "192.168.1.1"
+    # Core KDD features (most impactful ones exposed; rest default to 0)
+    duration: float = 0.0
+    protocol_type: str = "tcp"
+    service: str = "http"
+    flag: str = "SF"
+    src_bytes: float = 0.0
+    dst_bytes: float = 0.0
+    land: float = 0.0
+    wrong_fragment: float = 0.0
+    urgent: float = 0.0
+    hot: float = 0.0
+    num_failed_logins: float = 0.0
+    logged_in: float = 0.0
+    num_compromised: float = 0.0
+    root_shell: float = 0.0
+    su_attempted: float = 0.0
+    num_root: float = 0.0
+    num_file_creations: float = 0.0
+    num_shells: float = 0.0
+    num_access_files: float = 0.0
+    num_outbound_cmds: float = 0.0
+    is_host_login: float = 0.0
+    is_guest_login: float = 0.0
+    count: float = 0.0
+    srv_count: float = 0.0
+    serror_rate: float = 0.0
+    srv_serror_rate: float = 0.0
+    rerror_rate: float = 0.0
+    srv_rerror_rate: float = 0.0
+    same_srv_rate: float = 0.0
+    diff_srv_rate: float = 0.0
+    srv_diff_host_rate: float = 0.0
+    dst_host_count: float = 0.0
+    dst_host_srv_count: float = 0.0
+    dst_host_same_srv_rate: float = 0.0
+    dst_host_diff_srv_rate: float = 0.0
+    dst_host_same_src_port_rate: float = 0.0
+    dst_host_srv_diff_host_rate: float = 0.0
+    dst_host_serror_rate: float = 0.0
+    dst_host_srv_serror_rate: float = 0.0
+    dst_host_rerror_rate: float = 0.0
+    dst_host_srv_rerror_rate: float = 0.0
+
+
+@app.post("/predict")
+def manual_predict(req: PredictRequest):
+    """
+    Manual prediction endpoint.
+    Accepts KDD-format features directly and returns ML verdict + rule score.
+    Used by the dashboard's Manual Predict mode.
+    """
+    try:
+        agent = get_agent()
+    except Exception as e:
+        return {"error": f"Model not loaded: {e}"}
+
+    kdd = {
+        "duration": req.duration,
+        "protocol_type": req.protocol_type,
+        "service": req.service,
+        "flag": req.flag,
+        "src_bytes": req.src_bytes,
+        "dst_bytes": req.dst_bytes,
+        "land": req.land,
+        "wrong_fragment": req.wrong_fragment,
+        "urgent": req.urgent,
+        "hot": req.hot,
+        "num_failed_logins": req.num_failed_logins,
+        "logged_in": req.logged_in,
+        "num_compromised": req.num_compromised,
+        "root_shell": req.root_shell,
+        "su_attempted": req.su_attempted,
+        "num_root": req.num_root,
+        "num_file_creations": req.num_file_creations,
+        "num_shells": req.num_shells,
+        "num_access_files": req.num_access_files,
+        "num_outbound_cmds": req.num_outbound_cmds,
+        "is_host_login": req.is_host_login,
+        "is_guest_login": req.is_guest_login,
+        "count": req.count,
+        "srv_count": req.srv_count,
+        "serror_rate": req.serror_rate,
+        "srv_serror_rate": req.srv_serror_rate,
+        "rerror_rate": req.rerror_rate,
+        "srv_rerror_rate": req.srv_rerror_rate,
+        "same_srv_rate": req.same_srv_rate,
+        "diff_srv_rate": req.diff_srv_rate,
+        "srv_diff_host_rate": req.srv_diff_host_rate,
+        "dst_host_count": req.dst_host_count,
+        "dst_host_srv_count": req.dst_host_srv_count,
+        "dst_host_same_srv_rate": req.dst_host_same_srv_rate,
+        "dst_host_diff_srv_rate": req.dst_host_diff_srv_rate,
+        "dst_host_same_src_port_rate": req.dst_host_same_src_port_rate,
+        "dst_host_srv_diff_host_rate": req.dst_host_srv_diff_host_rate,
+        "dst_host_serror_rate": req.dst_host_serror_rate,
+        "dst_host_srv_serror_rate": req.dst_host_srv_serror_rate,
+        "dst_host_rerror_rate": req.dst_host_rerror_rate,
+        "dst_host_srv_rerror_rate": req.dst_host_srv_rerror_rate,
+    }
+
+    # Build raw dict for rule-based scorer (simulate CIC fields from KDD)
+    raw = {
+        "flow_pkts_s": req.count,
+        "flow_byts_s": req.src_bytes + req.dst_bytes,
+        "tot_fwd_pkts": req.src_bytes,
+        "tot_bwd_pkts": req.dst_bytes,
+        "flow_duration": req.duration * 1_000_000,
+        "syn_flag_cnt": 1 if req.flag in ("S0", "S1", "S2", "S3") else 0,
+        "rst_flag_cnt": 1 if req.flag == "RSTO" else 0,
+        "ack_flag_cnt": 1 if req.flag == "SF" else 0,
+        "protocol": "6" if req.protocol_type == "tcp" else ("17" if req.protocol_type == "udp" else "1"),
+        "dst_port": "80" if req.service == "http" else ("443" if req.service == "https" else ("22" if req.service == "ssh" else "0")),
+    }
+
+    result = agent.inspect(req.src_ip, kdd, raw=raw)
+
+    # Enrich with individual ML and rule scores for transparency
+    features = []
+    for col in agent.FEATURE_ORDER:
+        val = kdd.get(col, 0.0)
+        if col in ("protocol_type", "service", "flag"):
+            le = agent.encoders[col]
+            if val not in le.classes_:
+                val = "<unknown>"
+            features.append(le.transform([val])[0])
+        else:
+            try:
+                features.append(float(val))
+            except (ValueError, TypeError):
+                features.append(0.0)
+
+    scaled = agent.scaler.transform([features])
+    ml_prob = float(agent.model.predict_proba(scaled)[0][1])
+    rule_score = agent._rule_based_score(raw)
+
+    result["ml_prob"]    = round(ml_prob * 100, 2)
+    result["rule_score"] = round(rule_score * 100, 2)
+    result["threshold"]  = agent.threshold * 100
+
+    return result

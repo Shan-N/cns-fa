@@ -1,0 +1,18 @@
+# Core API
+fastapi
+uvicorn[standard]
+
+# Data and ML
+numpy
+pandas
+scikit-learn
+imbalanced-learn
+joblib
+
+# Visualization / notebook analysis
+matplotlib
+seaborn
+
+# Traffic simulation
+scapy
+torch

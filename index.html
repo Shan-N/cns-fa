@@ -135,6 +135,79 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 /* blocked IPs */
 .ip-list{display:flex;flex-wrap:wrap;gap:5px;}
 .ip-tag{background:rgba(239,68,68,.1);color:var(--red);font-family:var(--mono);font-size:.62rem;padding:2px 7px;border-radius:4px;border:1px solid rgba(239,68,68,.2);}
+
+/* ── Mode tabs ── */
+.mode-tabs{display:flex;gap:6px;padding:0 20px 0;flex-shrink:0;border-bottom:1px solid var(--border);background:var(--panel);}
+.mode-tab{padding:9px 16px;font-size:.75rem;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;}
+.mode-tab:hover{color:var(--txt);}
+.mode-tab.active{color:var(--blue);border-bottom-color:var(--blue);}
+.mode-page{display:none;flex:1;min-height:0;}
+.mode-page.active{display:flex;}
+
+/* ── Manual Predict ── */
+.predict-wrap{flex:1;display:flex;gap:14px;padding:14px 20px;overflow:hidden;}
+.predict-form-col{width:420px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;overflow-y:auto;}
+.predict-form-col::-webkit-scrollbar{width:4px;}
+.predict-form-col::-webkit-scrollbar-thumb{background:var(--borderL);border-radius:2px;}
+.predict-result-col{flex:1;display:flex;flex-direction:column;gap:10px;overflow-y:auto;}
+.predict-result-col::-webkit-scrollbar{width:4px;}
+.predict-result-col::-webkit-scrollbar-thumb{background:var(--borderL);border-radius:2px;}
+
+.fgroup{background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:12px 14px;}
+.fgroup-title{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:10px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.fgrid.col3{grid-template-columns:1fr 1fr 1fr;}
+.field{display:flex;flex-direction:column;gap:3px;}
+.field label{font-size:.62rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;}
+.field input,.field select{background:var(--bg);border:1px solid var(--borderL);color:var(--txt);font-family:var(--mono);font-size:.76rem;padding:5px 8px;border-radius:5px;outline:none;width:100%;}
+.field input:focus,.field select:focus{border-color:var(--blue);}
+.field select option{background:var(--panel);}
+
+.predict-btn{width:100%;padding:10px;background:var(--blue);color:#fff;border:none;border-radius:7px;font-size:.82rem;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:opacity .15s;}
+.predict-btn:hover{opacity:.85;}
+.predict-btn:active{opacity:.7;}
+.predict-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* Result card */
+.result-card{background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:16px 18px;}
+.result-card.verdict-block{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.04);}
+.result-card.verdict-allow{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.04);}
+.verdict-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.verdict-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.verdict-icon.block{background:rgba(239,68,68,.15);}
+.verdict-icon.allow{background:rgba(16,185,129,.15);}
+.verdict-label{font-size:1.1rem;font-weight:700;}
+.verdict-label.block{color:var(--red);}
+.verdict-label.allow{color:var(--green);}
+.verdict-sub{font-size:.72rem;color:var(--muted);margin-top:2px;}
+
+.score-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;}
+.score-box{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:10px 12px;text-align:center;}
+.score-val{font-size:1.4rem;font-weight:700;font-family:var(--mono);}
+.score-lbl{font-size:.6rem;font-weight:600;text-transform:uppercase;color:var(--muted);margin-top:3px;letter-spacing:.4px;}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.detail-item{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;}
+.detail-lbl{font-size:.6rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:2px;}
+.detail-val{font-size:.8rem;font-weight:600;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.bar-big-wrap{margin:12px 0 4px;}
+.bar-big-track{height:8px;background:var(--hover);border-radius:4px;overflow:hidden;margin-top:4px;}
+.bar-big-fill{height:100%;border-radius:4px;transition:width .5s;}
+
+.result-history{background:var(--panel);border:1px solid var(--border);border-radius:9px;flex:1;}
+.rh-header{padding:10px 14px;border-bottom:1px solid var(--border);font-size:.75rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+.rh-body{overflow-y:auto;max-height:280px;}
+.rh-body::-webkit-scrollbar{width:4px;}
+.rh-body::-webkit-scrollbar-thumb{background:var(--borderL);border-radius:2px;}
+.rh-row{display:grid;grid-template-columns:64px 120px 50px 60px 80px 1fr;gap:8px;padding:7px 14px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.72rem;align-items:center;}
+.rh-row:hover{background:var(--hover);}
+.rh-th{font-size:.6rem;text-transform:uppercase;color:var(--muted);font-weight:600;letter-spacing:.3px;padding:6px 14px;background:var(--bg);border-bottom:1px solid var(--border);}
+.preset-row{display:flex;flex-wrap:wrap;gap:6px;}
+.preset-btn{background:var(--hover);border:1px solid var(--borderL);color:var(--muted);font-size:.65rem;font-weight:600;padding:4px 10px;border-radius:5px;cursor:pointer;transition:all .15s;}
+.preset-btn:hover{color:var(--txt);border-color:var(--blue);}
+.placeholder-result{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:8px;color:var(--muted);text-align:center;}
+.placeholder-result p{font-size:.76rem;line-height:1.5;}
 </style>
 </head>
 <body>
@@ -148,6 +221,12 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
   </div>
 </header>
 
+<div class="mode-tabs">
+  <button class="mode-tab active" onclick="switchMode('live')">📡 Live Monitor</button>
+  <button class="mode-tab" onclick="switchMode('predict')">🔬 Manual Predict</button>
+</div>
+
+<div class="mode-page active" id="page-live" style="flex-direction:column;">
 <div class="kpi-row">
   <div class="kpi">
     <div class="kpi-lbl">Total Traffic <span>—</span></div>
@@ -262,6 +341,185 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
   </div>
 </div>
 
+</div><!-- end page-live -->
+
+<!-- ── Manual Predict Mode ── -->
+<div class="mode-page" id="page-predict">
+  <div class="predict-wrap">
+
+    <!-- Left: Form -->
+    <div class="predict-form-col">
+
+      <!-- API URL -->
+      <div class="fgroup">
+        <div class="fgrid">
+          <div class="field" style="grid-column:1/-1">
+            <label>API Base URL</label>
+            <input id="predict-api-url" value="http://localhost:8000" spellcheck="false"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets -->
+      <div class="fgroup">
+        <div class="fgroup-title">Quick Presets</div>
+        <div class="preset-row">
+          <button class="preset-btn" onclick="loadPreset('normal')">✅ Normal Flow</button>
+          <button class="preset-btn" onclick="loadPreset('syn')">🔴 SYN Flood</button>
+          <button class="preset-btn" onclick="loadPreset('portscan')">🟡 Port Scan</button>
+          <button class="preset-btn" onclick="loadPreset('udp')">🟠 UDP Flood</button>
+          <button class="preset-btn" onclick="loadPreset('http')">🟣 HTTP Flood</button>
+          <button class="preset-btn" onclick="loadPreset('r2l')">⚫ R2L Attack</button>
+        </div>
+      </div>
+
+      <!-- Identity -->
+      <div class="fgroup">
+        <div class="fgroup-title">Identity</div>
+        <div class="fgrid">
+          <div class="field">
+            <label>Source IP</label>
+            <input id="f-src_ip" value="192.168.1.100"/>
+          </div>
+          <div class="field">
+            <label>Protocol Type</label>
+            <select id="f-protocol_type">
+              <option value="tcp">TCP</option>
+              <option value="udp">UDP</option>
+              <option value="icmp">ICMP</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Service</label>
+            <select id="f-service">
+              <option value="http">http</option>
+              <option value="https">https</option>
+              <option value="ftp">ftp</option>
+              <option value="ssh">ssh</option>
+              <option value="smtp">smtp</option>
+              <option value="domain">domain</option>
+              <option value="private">private</option>
+              <option value="other">other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Flag</label>
+            <select id="f-flag">
+              <option value="SF">SF (Normal)</option>
+              <option value="S0">S0 (SYN no resp)</option>
+              <option value="REJ">REJ (Rejected)</option>
+              <option value="RSTO">RSTO (Reset)</option>
+              <option value="S1">S1</option>
+              <option value="S2">S2</option>
+              <option value="S3">S3</option>
+              <option value="OTH">OTH</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Traffic Volume -->
+      <div class="fgroup">
+        <div class="fgroup-title">Traffic Volume</div>
+        <div class="fgrid">
+          <div class="field">
+            <label>Duration (s)</label>
+            <input id="f-duration" type="number" value="0" min="0" step="0.001"/>
+          </div>
+          <div class="field">
+            <label>Src Bytes</label>
+            <input id="f-src_bytes" type="number" value="0" min="0"/>
+          </div>
+          <div class="field">
+            <label>Dst Bytes</label>
+            <input id="f-dst_bytes" type="number" value="0" min="0"/>
+          </div>
+          <div class="field">
+            <label>Count (conn/2s)</label>
+            <input id="f-count" type="number" value="1" min="0"/>
+          </div>
+          <div class="field">
+            <label>Srv Count</label>
+            <input id="f-srv_count" type="number" value="1" min="0"/>
+          </div>
+          <div class="field">
+            <label>Land</label>
+            <select id="f-land"><option value="0">0 — No</option><option value="1">1 — Yes</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connection Rates -->
+      <div class="fgroup">
+        <div class="fgroup-title">Connection Rate Features</div>
+        <div class="fgrid col3">
+          <div class="field"><label>Serror Rate</label><input id="f-serror_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Rerror Rate</label><input id="f-rerror_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Same Srv Rate</label><input id="f-same_srv_rate" type="number" value="1" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Diff Srv Rate</label><input id="f-diff_srv_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Srv Serror Rate</label><input id="f-srv_serror_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Srv Rerror Rate</label><input id="f-srv_rerror_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+        </div>
+      </div>
+
+      <!-- Dst Host Features -->
+      <div class="fgroup">
+        <div class="fgroup-title">Destination Host Features</div>
+        <div class="fgrid col3">
+          <div class="field"><label>Dst Host Count</label><input id="f-dst_host_count" type="number" value="1" min="0" max="255"/></div>
+          <div class="field"><label>Dst Srv Count</label><input id="f-dst_host_srv_count" type="number" value="1" min="0" max="255"/></div>
+          <div class="field"><label>Same Srv Rate</label><input id="f-dst_host_same_srv_rate" type="number" value="1" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Diff Srv Rate</label><input id="f-dst_host_diff_srv_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Serror Rate</label><input id="f-dst_host_serror_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+          <div class="field"><label>Rerror Rate</label><input id="f-dst_host_rerror_rate" type="number" value="0" min="0" max="1" step="0.01"/></div>
+        </div>
+      </div>
+
+      <!-- Intrusion Indicators -->
+      <div class="fgroup">
+        <div class="fgroup-title">Intrusion Indicators</div>
+        <div class="fgrid">
+          <div class="field"><label>Logged In</label><select id="f-logged_in"><option value="0">0 — No</option><option value="1">1 — Yes</option></select></div>
+          <div class="field"><label>Num Failed Logins</label><input id="f-num_failed_logins" type="number" value="0" min="0"/></div>
+          <div class="field"><label>Num Compromised</label><input id="f-num_compromised" type="number" value="0" min="0"/></div>
+          <div class="field"><label>Root Shell</label><select id="f-root_shell"><option value="0">0 — No</option><option value="1">1 — Yes</option></select></div>
+          <div class="field"><label>Su Attempted</label><select id="f-su_attempted"><option value="0">0 — No</option><option value="1">1 — Yes</option></select></div>
+          <div class="field"><label>Num Root</label><input id="f-num_root" type="number" value="0" min="0"/></div>
+          <div class="field"><label>Num Shells</label><input id="f-num_shells" type="number" value="0" min="0"/></div>
+          <div class="field"><label>Is Guest Login</label><select id="f-is_guest_login"><option value="0">0 — No</option><option value="1">1 — Yes</option></select></div>
+        </div>
+      </div>
+
+      <button class="predict-btn" id="predict-submit-btn" onclick="submitPredict()">Run Prediction</button>
+    </div>
+
+    <!-- Right: Result -->
+    <div class="predict-result-col">
+
+      <!-- Verdict card -->
+      <div id="predict-result-card" class="result-card">
+        <div class="placeholder-result">
+          <div style="font-size:2rem">🔬</div>
+          <p>Fill in the fields on the left<br>and click <b>Run Prediction</b><br>to get a model verdict.</p>
+        </div>
+      </div>
+
+      <!-- History table -->
+      <div class="result-history">
+        <div class="rh-header">
+          Prediction History
+          <button class="btn" style="font-size:.6rem;padding:3px 8px" onclick="clearHistory()">Clear</button>
+        </div>
+        <div class="rh-th" style="display:grid;grid-template-columns:64px 120px 50px 60px 80px 1fr;gap:8px;padding:6px 14px;">
+          <span>Time</span><span>IP</span><span>Proto</span><span>Service</span><span>Verdict</span><span>Confidence</span>
+        </div>
+        <div class="rh-body" id="predict-history"></div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- end page-predict -->
+
 <script>
 // ── State ──────────────────────────────────────────────────────────
 const MAX_ROWS = 120;
@@ -316,12 +574,7 @@ function drawLatency() {
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
   }
 
-  // Line
   const step = W / (LAT_MAX - 1);
-  ctx.beginPath();
-  ctx.strokeStyle = "#3B82F6";
-  ctx.lineWidth = 1.5;
-  ctx.lineJoin = "round";
 
   // Fill
   ctx.beginPath();
@@ -340,6 +593,7 @@ function drawLatency() {
   ctx.beginPath();
   ctx.strokeStyle = "#3B82F6";
   ctx.lineWidth = 1.5;
+  ctx.lineJoin = "round";
   vals.forEach((v, i) => {
     const x = i * step;
     const y = H - ((v - minVal) / (maxVal - minVal + 0.001)) * H * 0.85 - H * 0.075;
@@ -472,7 +726,7 @@ function addRow(d) {
   if (atkType === "—") {
     atkHtml = `<span class="atk-badge atk-none">—</span>`;
   } else {
-    const cls = atkType.split(" ")[0]; // "SYN", "UDP", "ICMP", "HTTP", "TCP", "Port"
+    const cls = atkType.split(" ")[0];
     atkHtml = `<span class="atk-badge atk-${cls}">${atkType}</span>`;
   }
 
@@ -540,7 +794,6 @@ function renderBars(id, data, color) {
     </div>`).join("");
 }
 
-// Attack type bar colours
 const ATK_COLORS = {
   "SYN Flood":  "#f87171",
   "UDP Flood":  "#fb923c",
@@ -587,6 +840,288 @@ function setBadge(txt, color) {
   b.style.background = color === "green" ? "rgba(16,185,129,.1)" : "";
 }
 
+// ── Mode switching ─────────────────────────────────────────────────
+function switchMode(mode) {
+  document.querySelectorAll('.mode-tab').forEach((t,i) => {
+    t.classList.toggle('active', (i===0&&mode==='live')||(i===1&&mode==='predict'));
+  });
+  document.getElementById('page-live').classList.toggle('active', mode==='live');
+  document.getElementById('page-predict').classList.toggle('active', mode==='predict');
+}
+
+// ── Presets ────────────────────────────────────────────────────────
+const PRESETS = {
+  normal: {
+    src_ip:"10.0.0.42", protocol_type:"tcp", service:"http", flag:"SF",
+    duration:0.05, src_bytes:492, dst_bytes:5243, count:3, srv_count:3,
+    serror_rate:0, rerror_rate:0, same_srv_rate:1, diff_srv_rate:0,
+    dst_host_count:255, dst_host_srv_count:255, dst_host_same_srv_rate:1,
+    dst_host_diff_srv_rate:0, dst_host_serror_rate:0, dst_host_rerror_rate:0,
+    logged_in:1, num_failed_logins:0, num_compromised:0
+  },
+  syn: {
+    src_ip:"192.168.99.1", protocol_type:"tcp", service:"private", flag:"S0",
+    duration:0, src_bytes:0, dst_bytes:0, count:511, srv_count:511,
+    serror_rate:1, srv_serror_rate:1, rerror_rate:0, same_srv_rate:1, diff_srv_rate:0,
+    dst_host_count:255, dst_host_srv_count:255, dst_host_same_srv_rate:1,
+    dst_host_diff_srv_rate:0, dst_host_serror_rate:1, dst_host_rerror_rate:0,
+    logged_in:0, num_failed_logins:0
+  },
+  portscan: {
+    src_ip:"192.168.99.50", protocol_type:"tcp", service:"private", flag:"REJ",
+    duration:0, src_bytes:0, dst_bytes:0, count:255, srv_count:1,
+    serror_rate:0, rerror_rate:1, srv_rerror_rate:1, same_srv_rate:0.01, diff_srv_rate:0.06,
+    dst_host_count:255, dst_host_srv_count:1, dst_host_same_srv_rate:0.01,
+    dst_host_diff_srv_rate:0.06, dst_host_serror_rate:0, dst_host_rerror_rate:1,
+    logged_in:0
+  },
+  udp: {
+    src_ip:"192.168.99.77", protocol_type:"udp", service:"domain", flag:"SF",
+    duration:0, src_bytes:28, dst_bytes:0, count:511, srv_count:511,
+    serror_rate:0, rerror_rate:0, same_srv_rate:1, diff_srv_rate:0,
+    dst_host_count:255, dst_host_srv_count:255, dst_host_same_srv_rate:1,
+    dst_host_diff_srv_rate:0, dst_host_serror_rate:0, dst_host_rerror_rate:0,
+    logged_in:0
+  },
+  http: {
+    src_ip:"192.168.99.20", protocol_type:"tcp", service:"http", flag:"SF",
+    duration:0.002, src_bytes:325, dst_bytes:2100, count:511, srv_count:511,
+    serror_rate:0, rerror_rate:0, same_srv_rate:1, diff_srv_rate:0,
+    dst_host_count:255, dst_host_srv_count:255, dst_host_same_srv_rate:1,
+    dst_host_diff_srv_rate:0, dst_host_serror_rate:0, dst_host_rerror_rate:0,
+    logged_in:0
+  },
+  r2l: {
+    src_ip:"192.168.99.99", protocol_type:"tcp", service:"ftp", flag:"SF",
+    duration:0.12, src_bytes:1800, dst_bytes:3400, count:2, srv_count:2,
+    serror_rate:0, rerror_rate:0, same_srv_rate:1, diff_srv_rate:0,
+    dst_host_count:10, dst_host_srv_count:10, dst_host_same_srv_rate:1,
+    dst_host_diff_srv_rate:0, dst_host_serror_rate:0, dst_host_rerror_rate:0,
+    logged_in:0, num_failed_logins:5, root_shell:1, su_attempted:1, num_shells:1
+  }
+};
+
+function loadPreset(name) {
+  const p = PRESETS[name];
+  if (!p) return;
+  const fieldMap = {
+    src_ip:'f-src_ip', protocol_type:'f-protocol_type', service:'f-service', flag:'f-flag',
+    duration:'f-duration', src_bytes:'f-src_bytes', dst_bytes:'f-dst_bytes',
+    count:'f-count', srv_count:'f-srv_count', land:'f-land',
+    serror_rate:'f-serror_rate', rerror_rate:'f-rerror_rate', same_srv_rate:'f-same_srv_rate',
+    diff_srv_rate:'f-diff_srv_rate', srv_serror_rate:'f-srv_serror_rate', srv_rerror_rate:'f-srv_rerror_rate',
+    dst_host_count:'f-dst_host_count', dst_host_srv_count:'f-dst_host_srv_count',
+    dst_host_same_srv_rate:'f-dst_host_same_srv_rate', dst_host_diff_srv_rate:'f-dst_host_diff_srv_rate',
+    dst_host_serror_rate:'f-dst_host_serror_rate', dst_host_rerror_rate:'f-dst_host_rerror_rate',
+    logged_in:'f-logged_in', num_failed_logins:'f-num_failed_logins',
+    num_compromised:'f-num_compromised', root_shell:'f-root_shell',
+    su_attempted:'f-su_attempted', num_root:'f-num_root', num_shells:'f-num_shells',
+    is_guest_login:'f-is_guest_login'
+  };
+  for (const [key, elId] of Object.entries(fieldMap)) {
+    const el = document.getElementById(elId);
+    if (!el) continue;
+    if (p[key] !== undefined) el.value = p[key];
+    else {
+      el.value = el.tagName === 'SELECT' ? el.options[0].value : '0';
+    }
+  }
+  ['f-num_root','f-num_shells','f-is_guest_login','f-root_shell','f-su_attempted',
+   'f-num_failed_logins','f-num_compromised','f-srv_serror_rate','f-srv_rerror_rate'].forEach(id => {
+    const key = id.replace('f-', '');
+    if (p[key] === undefined) {
+      const el = document.getElementById(id);
+      if (el) el.value = el.tagName === 'SELECT' ? '0' : '0';
+    }
+  });
+}
+
+// ── Predict submit ─────────────────────────────────────────────────
+let predictHistory = [];
+
+function gv(id, fallback=0) {
+  const el = document.getElementById(id);
+  if (!el) return fallback;
+  const v = el.value;
+  if (el.tagName === 'SELECT' || id === 'f-src_ip' || id === 'f-protocol_type' || id === 'f-service' || id === 'f-flag') return v;
+  return parseFloat(v) || 0;
+}
+
+async function submitPredict() {
+  const btn = document.getElementById('predict-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Running…';
+
+  const baseUrl = document.getElementById('predict-api-url').value.trim().replace(/\/$/, '');
+
+  const payload = {
+    src_ip: gv('f-src_ip'),
+    protocol_type: gv('f-protocol_type'),
+    service: gv('f-service'),
+    flag: gv('f-flag'),
+    duration: gv('f-duration'),
+    src_bytes: gv('f-src_bytes'),
+    dst_bytes: gv('f-dst_bytes'),
+    land: gv('f-land'),
+    count: gv('f-count'),
+    srv_count: gv('f-srv_count'),
+    serror_rate: gv('f-serror_rate'),
+    srv_serror_rate: gv('f-srv_serror_rate'),
+    rerror_rate: gv('f-rerror_rate'),
+    srv_rerror_rate: gv('f-srv_rerror_rate'),
+    same_srv_rate: gv('f-same_srv_rate'),
+    diff_srv_rate: gv('f-diff_srv_rate'),
+    dst_host_count: gv('f-dst_host_count'),
+    dst_host_srv_count: gv('f-dst_host_srv_count'),
+    dst_host_same_srv_rate: gv('f-dst_host_same_srv_rate'),
+    dst_host_diff_srv_rate: gv('f-dst_host_diff_srv_rate'),
+    dst_host_serror_rate: gv('f-dst_host_serror_rate'),
+    dst_host_rerror_rate: gv('f-dst_host_rerror_rate'),
+    logged_in: gv('f-logged_in'),
+    num_failed_logins: gv('f-num_failed_logins'),
+    num_compromised: gv('f-num_compromised'),
+    root_shell: gv('f-root_shell'),
+    su_attempted: gv('f-su_attempted'),
+    num_root: gv('f-num_root'),
+    num_shells: gv('f-num_shells'),
+    is_guest_login: gv('f-is_guest_login'),
+    wrong_fragment:0, urgent:0, hot:0, num_file_creations:0,
+    num_access_files:0, num_outbound_cmds:0, is_host_login:0,
+    srv_diff_host_rate:0, dst_host_same_src_port_rate:0,
+    dst_host_srv_diff_host_rate:0, dst_host_srv_serror_rate:0,
+    dst_host_srv_rerror_rate:0
+  };
+
+  try {
+    const resp = await fetch(`${baseUrl}/predict`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const d = await resp.json();
+    renderPredictResult(d);
+    predictHistory.unshift({...d, ts: new Date().toLocaleTimeString()});
+    renderPredictHistory();
+  } catch(err) {
+    document.getElementById('predict-result-card').className = 'result-card';
+    document.getElementById('predict-result-card').innerHTML = `
+      <div class="placeholder-result">
+        <div style="font-size:2rem;color:var(--red)">⚠</div>
+        <p style="color:var(--red)">Request failed:<br><code style="font-size:.68rem;color:var(--muted)">${err.message}</code></p>
+        <p style="font-size:.68rem">Make sure the API is running at<br><b>${baseUrl}</b></p>
+      </div>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Run Prediction';
+}
+
+function renderPredictResult(d) {
+  const isBlock = d.action === 'blocked' || d.action === 'dropped';
+  const conf = parseFloat(d.confidence) || 0;
+  const ml   = parseFloat(d.ml_prob)   || 0;
+  const rule = parseFloat(d.rule_score) || 0;
+  const thresh = parseFloat(d.threshold) || 85;
+
+  const card = document.getElementById('predict-result-card');
+  card.className = `result-card verdict-${isBlock ? 'block' : 'allow'}`;
+
+  const atkType = d.attack_type && d.attack_type !== '—' ? d.attack_type : null;
+  const ipColor = d.trust === 'attacker' ? 'var(--red)' : d.trust === 'trusted' ? 'var(--green)' : 'var(--txt)';
+
+  card.innerHTML = `
+    <div class="verdict-header">
+      <div class="verdict-icon ${isBlock ? 'block' : 'allow'}">${isBlock ? '🚫' : '✅'}</div>
+      <div>
+        <div class="verdict-label ${isBlock ? 'block' : 'allow'}">${isBlock ? 'BLOCK' : 'ALLOW'}</div>
+        <div class="verdict-sub">${atkType ? 'Attack type: <b>' + atkType + '</b>' : 'No attack detected'} &nbsp;·&nbsp; ${d.status || ''}</div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-box">
+        <div class="score-val" style="color:${conf>=thresh?'var(--red)':'var(--green)'}">${conf.toFixed(1)}%</div>
+        <div class="score-lbl">Final Score</div>
+      </div>
+      <div class="score-box">
+        <div class="score-val" style="color:var(--blue)">${ml.toFixed(1)}%</div>
+        <div class="score-lbl">ML Prob</div>
+      </div>
+      <div class="score-box">
+        <div class="score-val" style="color:var(--yellow)">${rule.toFixed(1)}%</div>
+        <div class="score-lbl">Rule Score</div>
+      </div>
+    </div>
+
+    <div class="bar-big-wrap">
+      <div style="display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);">
+        <span>Threat Confidence</span>
+        <span>Block threshold: ${thresh}%</span>
+      </div>
+      <div class="bar-big-track">
+        <div class="bar-big-fill" style="width:${Math.min(conf,100)}%;background:${conf>=thresh?'var(--red)':'var(--green)'}"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:.6rem;color:var(--muted);margin-top:3px;">
+        <span>0%</span>
+        <span style="color:var(--yellow);position:relative;left:${thresh}%">▲${thresh}%</span>
+        <span>100%</span>
+      </div>
+    </div>
+
+    <div class="detail-grid" style="margin-top:10px;">
+      <div class="detail-item">
+        <div class="detail-lbl">Source IP</div>
+        <div class="detail-val" style="color:${ipColor}">${d.ip || '—'}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-lbl">Zone</div>
+        <div class="detail-val">${d.zone || '—'}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-lbl">Protocol</div>
+        <div class="detail-val" style="text-transform:uppercase">${d.protocol || '—'}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-lbl">Service</div>
+        <div class="detail-val" style="color:var(--blue)">${d.service || '—'}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-lbl">Subnet</div>
+        <div class="detail-val">${d.subnet || '—'}</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-lbl">Trust Level</div>
+        <div class="detail-val" style="color:${ipColor}">${d.trust || '—'}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderPredictHistory() {
+  const el = document.getElementById('predict-history');
+  if (!predictHistory.length) { el.innerHTML = '<div style="padding:14px;font-size:.72rem;color:var(--muted)">No predictions yet.</div>'; return; }
+  el.innerHTML = predictHistory.slice(0,30).map(d => {
+    const isBlock = d.action==='blocked'||d.action==='dropped';
+    const conf = parseFloat(d.confidence)||0;
+    const col = isBlock ? 'var(--red)' : 'var(--green)';
+    const ipCol = d.trust==='attacker' ? 'var(--red)' : d.trust==='trusted' ? 'var(--green)' : 'var(--txt)';
+    return `<div class="rh-row">
+      <span style="color:var(--muted)">${d.ts||'—'}</span>
+      <span style="color:${ipCol};font-family:'JetBrains Mono'">${d.ip||'—'}</span>
+      <span style="text-transform:uppercase;color:var(--muted)">${d.protocol||'—'}</span>
+      <span style="color:var(--blue)">${d.service||'—'}</span>
+      <span style="color:${col};font-weight:700">${isBlock?'BLOCK':'ALLOW'}</span>
+      <span style="color:${col}">${conf.toFixed(1)}%</span>
+    </div>`;
+  }).join('');
+}
+
+function clearHistory() {
+  predictHistory = [];
+  renderPredictHistory();
+}
+
 // ── Auto-connect on load ───────────────────────────────────────────
 window.addEventListener("load", () => {
   document.getElementById("ws-url").addEventListener("keydown", e => {
@@ -594,6 +1129,7 @@ window.addEventListener("load", () => {
   });
   connectTraffic();
   connectLatency();
+  renderPredictHistory();
 });
 </script>
 </body>

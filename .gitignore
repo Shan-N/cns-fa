@@ -4,3 +4,5 @@ gitignore
 dos2.py
 *.pkl
 *.ipynb
+.DS_Store
+*.log

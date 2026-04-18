@@ -84,7 +84,7 @@ def make_attack_row(src_ip, proto, port):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     duration = random.uniform(0.001, 0.05)           # very short flows = DoS
     fwd_bytes = random.randint(5000, 50000)
-    pkt_rate  = random.uniform(5000, 30000)          # packets/s = extreme
+    pkt_rate  = random.uniform(20,50)          # packets/s = extreme
     return {
         "src_ip": src_ip,
         "dst_ip": TARGET_IP,
